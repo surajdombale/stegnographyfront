@@ -48,7 +48,7 @@ const Login = () => {
         console.log(response.data)
         if(response.data!=="Credentials Invalid !!"){
           log=true; 
-          dispatch(login(response.data.token,response.data.user,response.data.role));
+          dispatch(login(response.data.token,response.data.user,"ADMIN"));
         }
       })
       .catch(error => {
