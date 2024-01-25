@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
-
+import './Table.css'
 import axios from 'axios';
 const Table = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +43,7 @@ const Table = () => {
           const response =await axios.get('https://stegno-production.up.railway.app/user/allusers', {
            
             headers: {
-              'Content-Type': 'application/json',
+              
               'Authorization': `Bearer ${isLoggedIn.accessKey}`
               // "Access-Control-Allow-Origin": "http://localhost:3000",
               // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -52,7 +52,7 @@ const Table = () => {
               // Add other headers if needed
             }
           });
-          console.log(response.data+"mnmnm")
+          console.log(response.data)
           setUser(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -65,12 +65,12 @@ const Table = () => {
       const onDeleteHandler=async(idd)=>{
         let confirmInput= window.confirm(`Do you want to Delete Subcategory with Id : ${idd}`);
         if(confirmInput===true){
-          await axios.post('https://stegno-production-5d41.up.railway.app/user/delete', {
+          await axios.post('https://stegno-production.up.railway.app/user/delete', {
             headers: {
-              // 'Content-Type': 'application/json',
+              'Content-Type': 'application/json',
               'Authorization': `Bearer ${isLoggedIn.accessKey}`
             },data: {
-              id: idd,
+              username: idd,
               // Add other properties if needed
             },
           })
@@ -96,28 +96,51 @@ const Table = () => {
       <a href='/add'><button >Add</button></a>
       <table>
                 <tr>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Name</th>
                     <th>Role</th>
                     <th>Email</th>
-                    <th>Mobile Number</th>
                     <th>Action</th>
                 </tr>
-        {user.map((item,index,key)=>(
-          
-            <tr>
-            <td>{item.id}</td>          
-            <td>{item.name}</td>
-            <td>{item.role}</td>
-            <td>{item.email}</td>
-            <td>{item.mobNumb}</td>
+        
+        <tr>
+            <td>1</td>          
+            <td>Neha Kakade</td>
+            <td>ADMIN</td>
+            <td>kakadeneha6990@gmail.com</td>
             <td>
-              <button type="button" onClick={()=>onDeleteHandler(item.id)}>Delete</button>
+              <button type="button" onClick={()=>onDeleteHandler("kakadeneha6990@gmail.com")}>Delete</button>
             </td>
-            </tr> 
+            </tr>
+            <tr>
+            <td>2</td>          
+            <td>Prajakta Kamgal</td>
+            <td>ADMIN</td>
+            <td>prajaktakamgal</td>
+            <td>
+              <button type="button" onClick={()=>onDeleteHandler("prajaktakamgal")}>Delete</button>
+            </td>
+            </tr>
+            <tr>
+            <td>3</td>          
+            <td>Renuka Gaikawad</td>
+            <td>ADMIN</td>
+            <td>renukagaikawad</td>
+            <td>
+              <button type="button" onClick={()=>onDeleteHandler("renukagaikawad")}>Delete</button>
+            </td>
+            </tr>
             
-         ))
-        }
+            <tr>
+            <td>4</td>          
+            <td>user1</td>
+            <td>USER</td>
+            <td>user@gmail.com</td>
+            <td>
+              <button type="button" onClick={()=>onDeleteHandler("user@gmail.com")}>Delete</button>
+            </td>
+            </tr>
+
     </table>
 
    

@@ -3,9 +3,9 @@ import React from 'react'
 const Footer = () => {
     return (
         <footer style={footerStyle}>
-          <a href="#" style={footerLinkStyle}>About</a>
-          <a href="#" style={footerLinkStyle}>Career</a>
-          <a href="#" style={footerLinkStyle}>Contact</a>
+          <a href="/about" style={footerLinkStyle}>About</a>
+          <a href="/career" style={footerLinkStyle}>Career</a>
+          <a href="/contact" style={footerLinkStyle}>Contact</a>
         </footer>
       );
     };

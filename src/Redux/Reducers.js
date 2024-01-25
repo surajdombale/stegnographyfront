@@ -4,6 +4,8 @@
 const initialState = {
     isLoggedIn: false,
     accessKey: null,
+    user:null,
+    role:null,
   };
   
   const rootReducer = (state = initialState, action) => {
@@ -13,12 +15,16 @@ const initialState = {
           ...state,
           isLoggedIn: true,
           accessKey: action.payload,
+          user:action.user,
+          role:action.role,
         };
       case 'LOGOUT':
         return {
           ...state, 
           isLoggedIn: false,
           accessKey: null,
+          user:null,
+          role:null,
         };
       
       default:

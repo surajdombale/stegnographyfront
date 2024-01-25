@@ -7,12 +7,13 @@ const AddUser = () => {
   const nav=useNavigate();
   const isLoggedIn = useSelector((state) => state);
     const [formData, setFormData] = useState({
-        name: '',
-        userName: '',
+        fullName: '',
+        username: '',
         email: '',
-        userPassword:'',
+        password:'',
         role:'',
-        mobNumb:"",
+        enable:false,
+        
       });
       useEffect(()=>{
         
@@ -23,17 +24,29 @@ const AddUser = () => {
      },[])
       const handleInputChange = (e) => {
         // Spread the existing form data and update the changed field
-        setFormData({
+        if(e.target.name==="enable"){
+          
+          setFormData({
+            ...formData,
+            [e.target.name]: true,
+          });
+         
+
+        }else{
+           setFormData({
           ...formData,
           [e.target.name]: e.target.value,
         });
+       
+      }
+      
         console.log(formData);
       };
 
 
       const handleSubmit=async()=>{
             
-      await axios.post("http://localhost:8080/user/save", JSON.stringify(formData), {
+      await axios.post("https://stegno-production.up.railway.app/user/save", JSON.stringify(formData), {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${isLoggedIn.accessKey}`
@@ -56,35 +69,33 @@ const AddUser = () => {
         <h1>Add New User</h1>
         <form id="user-form" encytpe="ENCTYPE_HERE">
             <div><label for="user-name">Name:</label>
-            <input type="text" id="name"  name="name"  value={formData.firstName}
+            <input type="text" id="name"  name="fullName"  value={formData.fullName}
           onChange={handleInputChange} required /></div>
             <div><label for="user-username">UserName:</label>
-            <input type="text" id="user-username"   name="userName"  value={formData.firstName}
+            <input type="text" id="user-username"   name="username"  value={formData.username}
           onChange={handleInputChange} required />
             </div><br/>
             <div><label for="user-email">Email:</label>
-            <input type="text" id="user-email"   name="email"  value={formData.firstName}
+            <input type="text" id="user-email"   name="email"  value={formData.email}
           onChange={handleInputChange} required />
             </div><br/>
             <div><label for="user-password">Password:</label>
-            <input type="text" id="user-password"   name="userPassword"  value={formData.firstName}
+            <input type="text" id="user-password"   name="password"  value={formData.password}
           onChange={handleInputChange} required />
             </div><br/>
             <div>
             <label for="userRole">Choose Role:</label>
-            <select name="role"   id="role"  value={formData.firstName}
+            <select name="role"   id="role"  
           onChange={handleInputChange} required>
             <option value="none" selected disabled hidden>Select an Option</option>     
           <option value="ADMIN" >Admin</option>
-          <option value="MANAGER" >Manager</option>
-          <option value="SUPERVISOR" >Supervisor</option>
+          <option value="USER" >User</option>
+          
         </select>
-        </div><br/>
-            <div><label for="user-mobile-no">Mobile No:</label>
-            <input type="text" id="user-mobile-no"   name="mobNumb"  value={formData.firstName}
-          onChange={handleInputChange} required />
-            </div><br/>
-                     
+        </div><br/><div>
+        <label for="userenable">SubCatgory Enabled</label> 
+            <input type="checkbox" name="enable" isChecked={formData.enable} onChange={handleInputChange} />
+                </div>  <br/>   
         <button type="button" onClick={handleSubmit}>Save</button>
         </form>
         <a href='/show/welcome' ><button >Cancel</button></a>

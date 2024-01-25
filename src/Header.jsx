@@ -1,13 +1,23 @@
 import React from 'react'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from './Redux/Action';
+import { useNavigate } from 'react-router';
 const Header = () => {
+  const isLoggedIn = useSelector((state) => state);
+  const nav=useNavigate();
+  const dispatch = useDispatch();
+  const log=()=>{
+    dispatch(logout());
+    nav("/You have Logged out");
+  }
+  const login=()=>{
+    nav("/Please Login");
+  }
     return (
         <header style={headerStyle}>
-          <img src="path/to/your/logo.png" alt="Logo" style={logoStyle} />
-          <div style={userInfoStyle}>
-            <p>Email: kakadeneha6990.com</p>
-            <button onClick={logout} style={logoutButtonStyle}>Logout</button>
-          </div>
+           <a href="/" style={headingStyle}><h1>STEGNOGRAPHER</h1></a>
+         
+         
         </header>
       );
     };
@@ -20,31 +30,14 @@ const Header = () => {
       padding: '10px',
       marginLeft: 'auto',
     };
-    
-    const logoStyle = {
-      maxWidth: '100px', // Adjust the size of your logo
-      height: 'auto',
-      display: 'block',
-      margin: '0 auto', // Center the logo
-    };
-    
-    const userInfoStyle = {
-      marginTop: '10px',
-      marginLeft: 'auto',
-    };
-    
-    const logoutButtonStyle = {
-      backgroundColor: '#4CAF50',
+    const headingStyle = {
       color: '#fff',
-      padding: '8px 16px',
-      border: 'none',
-      cursor: 'pointer',
+      textAlign: 'center',
+      
       marginLeft: 'auto',
     };
     
-    const logout = () => {
-      // Add your logout logic here
-      alert('Logout clicked!');
-    };
+    
+
 
 export default Header

@@ -28,7 +28,17 @@ const Login = () => {
 
     // handlenpm  login user
     const handleLogin=async()=>{
-      let log=false;    
+
+      
+      let log=false;   
+      // if(formData.username=="user@gmail.com"&&formData.password=="root"){
+      //   log=true; 
+      //   dispatch(login("token","user@gmail.com","USER"));
+      // }
+      // if(formData.username=="kakadeneha6990@gmail.com"&&formData.password=="root"){
+      //   log=true; 
+      //   dispatch(login("token","kakadeneha6990@gmail.com","ADMIN"));
+      // }
     await axios.post("https://stegno-production.up.railway.app/auth/login", JSON.stringify(formData), {
       headers: {
         'Content-Type': 'application/json',
@@ -38,14 +48,14 @@ const Login = () => {
         console.log(response.data)
         if(response.data!=="Credentials Invalid !!"){
           log=true; 
-          dispatch(login(response.data.token));
+          dispatch(login(response.data.token,response.data.user,response.data.role));
         }
       })
       .catch(error => {
         console.error('Error:', error);
       });   
         if(log){
-           nav('/show/welcome')
+           nav('/')
          }else{
             window.alert('user & password is incorrect')
         } 
@@ -78,7 +88,11 @@ const Login = () => {
           Password:</label>
       <input type="password" name='password' value={formData.password} onChange={handleInputChange} required/>
        <button type='button' onClick={handleLogin}>Login</button>
+       <div className="signup-link">
+            Don't have an account? <a href="/signup">Sign Up</a>
+        </div>
       </form>
+      
      
       
     </div>
