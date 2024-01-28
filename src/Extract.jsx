@@ -1,16 +1,33 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 const Extract = () => {
     const [selectedFile, setSelectedFile] = useState(null);
+    const [lastFile, setLastFile] = useState(null);
+    const [data, setData] = useState(null);
+    const myFunction = async(param) => {
+      if(lastFile===selectedFile){
+       }
+      else{
+      setLastFile(param);
+      window.alert("fun")
+      setData("your text");
 
+      }
+ };
   
-    const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      setSelectedFile(file);
+const handleFileChange = (event) => {
+      
+      setSelectedFile(event.target.files[0]);
     };
   
-   
-  
+   const handleSubmit=()=>{
+    if(selectedFile!==null){
+      myFunction(selectedFile)
+       
+   }else{
+    window.alert("select File")
+   }
+   }
    
   
     return (
@@ -18,12 +35,13 @@ const Extract = () => {
         <h2 style={headerStyle}>Upload Photo and Get Text</h2>
         <form style={formStyle}>
           <div style={formGroupStyle}>
-            <label htmlFor="fileInput" style={labelStyle}>Upload Photo:</label>
-            <input type="file" id="fileInput" onChange={handleFileChange} accept="image/*" style={inputStyle} />
+            
+            <input type="file" id="fileInput" onChange={handleFileChange} accept="image/*" style={inputStyle}  />
           </div>
           
-          <button type="button"  style={buttonStyle}>Upload</button>
+          <button type="button"  style={buttonStyle} onClick={handleSubmit}>Upload</button>
         </form>
+       {data? <p>{data}</p>:null}
       </div>
     );
   };
@@ -35,7 +53,7 @@ const Extract = () => {
   };
   
   const headerStyle = {
-    color: '#4CAF50',
+    // color: '#4CAF50',
     marginBottom: '30px',
   };
   
@@ -54,7 +72,7 @@ const Extract = () => {
   const labelStyle = {
     display: 'block',
     marginBottom: '5px',
-    color: '#4CAF50',
+    // color: '#4CAF50',
   };
   
   const inputStyle = {

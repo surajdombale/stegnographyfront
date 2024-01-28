@@ -45,11 +45,11 @@ const Embed = () => {
 const pageStyle = {
   textAlign: 'center',
   padding: '20px',
-  color: '#333',
+  // color: '#333',
 };
 
 const headerStyle = {
-  color: '#4CAF50',
+  // color: '#4CAsF50',
   marginBottom: '30px',
 };
 
@@ -68,7 +68,7 @@ const formGroupStyle = {
 const labelStyle = {
   display: 'block',
   marginBottom: '5px',
-  color: '#4CAF50',
+  // color: '#4CAF50',
 };
 
 const inputStyle = {

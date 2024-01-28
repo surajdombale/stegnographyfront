@@ -23,22 +23,16 @@ const AddUser = () => {
        }
      },[])
       const handleInputChange = (e) => {
-        // Spread the existing form data and update the changed field
-        if(e.target.name==="enable"){
-          
-          setFormData({
-            ...formData,
-            [e.target.name]: true,
-          });
+      
          
 
-        }else{
+        
            setFormData({
           ...formData,
           [e.target.name]: e.target.value,
         });
        
-      }
+      
       
         console.log(formData);
       };
@@ -65,41 +59,33 @@ const AddUser = () => {
   return (
     <body1>
         
-    <div className="container">
+    <div className="contain">
         <h1>Add New User</h1>
-        <form id="user-form" encytpe="ENCTYPE_HERE">
-            <div><label for="user-name">Name:</label>
-            <input type="text" id="name"  name="fullName"  value={formData.fullName}
-          onChange={handleInputChange} required /></div>
-            <div><label for="user-username">UserName:</label>
-            <input type="text" id="user-username"   name="username"  value={formData.username}
-          onChange={handleInputChange} required />
-            </div><br/>
-            <div><label for="user-email">Email:</label>
-            <input type="text" id="user-email"   name="email"  value={formData.email}
-          onChange={handleInputChange} required />
-            </div><br/>
-            <div><label for="user-password">Password:</label>
-            <input type="text" id="user-password"   name="password"  value={formData.password}
-          onChange={handleInputChange} required />
-            </div><br/>
-            <div>
-            <label for="userRole">Choose Role:</label>
-            <select name="role"   id="role"  
-          onChange={handleInputChange} required>
-            <option value="none" selected disabled hidden>Select an Option</option>     
-          <option value="ADMIN" >Admin</option>
-          <option value="USER" >User</option>
-          
-        </select>
-        </div><br/><div>
-        <label for="userenable">SubCatgory Enabled</label> 
-            <input type="checkbox" name="enable" isChecked={formData.enable} onChange={handleInputChange} />
-                </div>  <br/>   
-        <button type="button" onClick={handleSubmit}>Save</button>
-        </form>
-        <a href='/show/welcome' ><button >Cancel</button></a>
-        </div>
+        
+ <form>
+  <div data-mdb-input-init class="form-outline mb-4">
+  <label class="form-label" for="form4Example2">Full Name</label>
+    <input type="email" id="form4Example2" name="fullName" onChange={handleInputChange} class="form-control" />
+  </div></form>
+        <form >
+
+ 
+  <div data-mdb-input-init class="form-outline mb-4">
+  <label class="form-label" for="form4Example2">Email address</label>
+    <input type="email" id="form4Example2" name="email" onChange={handleInputChange} class="form-control" />
+    
+  </div>
+  <div data-mdb-input-init>
+  <label class="form-label" for="form4Example2">Role</label>
+  <select class="form-select" name="role" onChange={handleInputChange} >
+  <option selected>Select Role</option>
+  <option value="ADMIN">ADMIN</option>
+  <option value="USER">USER</option>
+</select>
+</div>
+  <button data-mdb-ripple-init type="button" class="btn btn-primary btn-block mb-4">Add</button>
+</form>
+</div>
         </body1>
   )
 }

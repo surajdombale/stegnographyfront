@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { store,  persistor } from './Redux/Store';
 import { PersistGate } from 'redux-persist/integration/react';
 import AddUser from './AddUser';
-import NavBar from './NavBar';
+
 import Header from './Header';
 import Footer from './Footer';
 import Welcome from './Welcome';
@@ -16,6 +16,7 @@ import About from './About';
 import Embed from './Embed';
 import Extract from './Extract';
 import SignUp from './SignUp';
+import Help from './Help';
 
 
 function App() {
@@ -24,10 +25,10 @@ function App() {
       <BrowserRouter>
       <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}> 
-      <div style={appStyle}>
+      
       <Header/>
       <main style={mainStyle}>
-      <NavBar/> 
+      {/* <NavBar/>  */}
       
       <Routes>
         <Route path="/:id" element={<Login/>}/>
@@ -40,22 +41,19 @@ function App() {
           <Route path="/embed" element={<Embed/>}/>
           <Route path="/extract" element={<Extract/>}/>
           <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/help" element={<Help/>}/>
 
        </Routes>
 </main>
        <Footer/>
-       </div>
+       
        </PersistGate>
        </Provider> 
     </BrowserRouter>
     </div>
   );
 }
-const appStyle = {
-  // display: 'flex',
-  flexDirection: 'column',
-  // minHeight: '80vh', // Ensures the minimum height of the content area is the full viewport height
-};
+
 
 const mainStyle = {
   flex: 1,
