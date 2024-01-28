@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-
+import "bootstrap/dist/css/bootstrap.min.css"
 const SignUp = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-  
+    const [againPassword, setAgainPassword] = useState('');
     const handleUsernameChange = (event) => {
       setUsername(event.target.value);
     };
@@ -16,49 +16,106 @@ const SignUp = () => {
     const handlePasswordChange = (event) => {
       setPassword(event.target.value);
     };
-  
+    const handleAgainPasswordChange = (event) => {
+      setAgainPassword(event.target.value);
+    };
     const handleSignUp = () => {
       // Implement your sign-up logic here, e.g., send the user data to a server
       console.log('Username:', username);
       console.log('Email:', email);
       console.log('Password:', password);
       // Reset the form after sign-up
-      setUsername('');
-      setEmail('');
-      setPassword('');
+      if(againPassword!==password){
+        window.alert("enter passord correct");
+      }
     };
   
     return (
-      <div style={pageStyle}>
-        <h2 style={headerStyle}>Sign Up</h2>
-        <form style={formStyle}>
-          <div style={formGroupStyle}>
-            <label htmlFor="usernameInput" style={labelStyle}>Username:</label>
-            <input type="text" id="usernameInput" value={username} onChange={handleUsernameChange} style={inputStyle} />
+      <section class="vh-60 bg-#eee" style={sectionStyle}>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style={borderStyle}>
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form class="mx-1 mx-md-4">
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-">
+                      <input type="email" id="form3Example1c" class="form-control" value={username} onChange={handleUsernameChange} />
+                      <label class="form-label" for="form3Example3c">Your Name</label>
+                    </div>
+                  </div>
+                </form>
+                <form class="mx-1 mx-md-4">
+                
+                  
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" id="form3Example3c" class="form-control" value={email} onChange={handleEmailChange} required/>
+                      <label class="form-label" for="form3Example3c">Your Email</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4c" class="form-control" value={password} onChange={handlePasswordChange} required/>
+                      <label class="form-label" for="form3Example4c">Password</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" id="form3Example4cd" class="form-control" value={againPassword} onChange={handleAgainPasswordChange} required />
+                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                    </div>
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in <a href="#!">Terms of service</a>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg" onSubmit={handleSignUp}>Register</button>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image"/>
+
+              </div>
+            </div>
           </div>
-          <div style={formGroupStyle}>
-            <label htmlFor="emailInput" style={labelStyle}>Email:</label>
-            <input type="email" id="emailInput" value={email} onChange={handleEmailChange} style={inputStyle} />
-          </div>
-          <div style={formGroupStyle}>
-            <label htmlFor="passwordInput" style={labelStyle}>Password:</label>
-            <input type="password" id="passwordInput" value={password} onChange={handlePasswordChange} style={inputStyle} />
-          </div>
-          <button type="button" onClick={handleSignUp} style={buttonStyle}>Sign Up</button>
-        </form>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
+      
     );
   };
   
-  const pageStyle = {
-    textAlign: 'center',
-    padding: '20px',
-    color: '#333',
+  const borderStyle = {
+    borderRadius: '20px',
   };
   
-  const headerStyle = {
-    color: '#4CAF50',
-    marginBottom: '30px',
+  const sectionStyle = {
+    background: '#eee',
   };
   
   const formStyle = {

@@ -1,9 +1,10 @@
 // actions.js
-export const login = (key,use,rol) => ({
+export const login = (key,use,rol,sub) => ({
     type: 'LOGIN',
     payload: key,
     user:use,
     role:rol,
+    subscribe:sub,
   });
   
   export const logout = () => ({
@@ -11,6 +12,7 @@ export const login = (key,use,rol) => ({
     payload: null,
     user:null,
     role:null,
+    subscribe:null,
   });
 
   

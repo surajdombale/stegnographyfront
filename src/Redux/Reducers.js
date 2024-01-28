@@ -17,6 +17,7 @@ const initialState = {
           accessKey: action.payload,
           user:action.user,
           role:action.role,
+          subscribe:action.subscribe,
         };
       case 'LOGOUT':
         return {
@@ -25,6 +26,8 @@ const initialState = {
           accessKey: null,
           user:null,
           role:null,
+          subscribe:null,
+          subscribe:null,
         };
       
       default:

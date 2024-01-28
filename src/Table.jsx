@@ -10,8 +10,14 @@ const Table = () => {
   const nav=useNavigate();
   const isLoggedIn = useSelector((state) => state);
   const [user,setUser]=useState([]);
-  console.log(isLoggedIn.accessKey)
+  const [showMessages, setShowMessages] = useState(false);
 
+  // Assume you have some messages in an array
+  const messages = ['user 1', 'user 2', 'user 3']; 
+  console.log(isLoggedIn.accessKey)
+const banUser=(user)=>{
+window.confirm("Do You Want To Ban : "+user)
+}
 
   // used to show message and clear it after 5 seconds
   useEffect(() => {
@@ -40,16 +46,13 @@ const Table = () => {
       // use to fetch th data from api
       const getData=async()=>{        
         try {
-          const response =await axios.get('https://stegno-production.up.railway.app/user/allusers', {
+          const response =await axios.get('http://localhost:8080/user/allusers', {
            
             headers: {
+           
+            'Content-Type': 'application/json',
+              'Authorization': isLoggedIn.accessKey,
               
-              'Authorization': `Bearer ${isLoggedIn.accessKey}`
-              // "Access-Control-Allow-Origin": "http://localhost:3000",
-              // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-              // "Access-Control-Allow-Credentials": true,
-              // "Access-Control-Allow-Headers": "content-type"
-              // Add other headers if needed
             }
           });
           console.log(response.data)
@@ -92,8 +95,53 @@ const Table = () => {
 
   return (
     <div className='cust'>
-       <div className={`message-bar ${isVisible ? 'show' : 'hide'}`}>{message}</div>
-      <a href='/add'><button >Add</button></a>
+       {/* <div className={`message-bar ${isVisible ? 'show' : 'hide'}`}>{message}</div> */}
+      <a href='/add'><button type="button" class="btn btn-secondary" >Add</button></a>
+      <div>
+      {/* Red dot indicating new messages */}
+      {messages.length > 0 && !showMessages && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '55px',
+            right: '30px',
+            backgroundColor: 'red',
+            color: 'white',
+            borderRadius: '30%',
+            padding: '1px',
+            cursor: 'pointer',
+          }}
+         onMouseEnter={() => setShowMessages(true)} 
+        ><a>Spam User</a>
+          &#8226; {/* Bullet character representing the red dot */}
+        </div>
+      )}
+
+      {/* Messages roll-down container */}
+      {showMessages && (
+        <div onMouseLeave={() => setShowMessages(false)}
+          style={{
+            position: 'fixed',
+            top: '40px',
+            right: '10px',
+            backgroundColor: 'white',
+            border: '1px solid #ccc',
+            padding: '10px',
+            borderRadius: '5px',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+            zIndex: '999',
+          }}
+        >
+          {/* Display messages */}
+          {messages.map((message, index) => (
+            <div key={index} onClick={()=>banUser(message)}  style={{cursor: 'pointer'}}>{message}</div>
+          ))}
+
+          {/* Close button */}
+         
+        </div>
+      )}
+    </div>
       <table>
                 <tr>
                     <th>No</th>
