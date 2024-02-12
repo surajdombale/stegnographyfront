@@ -137,10 +137,10 @@ const handleBan=async(mail,enable)=>{
         
 // used to filter the e data
 useEffect(()=>{
-  setUserFilter(user.filter((item) => search === '' ||  item.email.toLowerCase().includes(search.toLowerCase())).filter((item) => filters === 'All' || item.role === filters));
+  setUserFilter(user.filter((item) => search === '' ||  item.email.toLowerCase().includes(search.toLowerCase())));
 },[search])
 useEffect(()=>{
-  setUserFilter(user.filter((item) => search === '' ||  item.email.toLowerCase().includes(search.toLowerCase())).filter((item) => filters === 'All' || item.role === filters));
+  setUserFilter(user.filter((item) => filters === 'All' || item.role === filters));
 },[filters])
 
 
