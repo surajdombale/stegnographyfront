@@ -110,7 +110,7 @@ if(textValue!==''&&selectedFile!==null&&lastFile!==selectedFile){
 
 
   useEffect(()=>{
-if(isLoggedIn.role!=='ADMIN'||!isLoggedIn.subscribe){
+if(isLoggedIn.role!=='ADMIN'&&!isLoggedIn.subscribe){
   checkUsage()
 }
   },[],[lastFile])
