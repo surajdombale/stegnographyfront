@@ -1,18 +1,41 @@
-import React, { useMemo, useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useMemo, useState } from 'react'
+import { useSelector } from 'react-redux';
 
 const Extract = () => {
     const [selectedFile, setSelectedFile] = useState(null);
+    
     const [lastFile, setLastFile] = useState(null);
+    const [usage,setUsage] = useState(false);
     const [data, setData] = useState(null);
+    const isLoggedIn = useSelector((state) => state);
     const myFunction = async(param) => {
-      if(lastFile===selectedFile){
+      if(lastFile===selectedFile||usage){
+        if(usage){
+          window.alert("beginer pack is over subscribe for more usage")
+        }
        }
       else{
-      setLastFile(param);
-      window.alert("fun")
-      setData("your text");
 
-      }
+      setLastFile(param);
+      if (param) {
+        // Display a preview of the selected image
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          // setPreviewImage(e.target.result);
+        };
+        reader.readAsDataURL(param);  
+      const formData = new FormData();
+      formData.append('image', selectedFile);
+      formData.append('username', isLoggedIn.user);
+      const response=await axios.post(`${isLoggedIn.link}/image/gettext`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'application/json',
+          'Authorization': isLoggedIn.accessKey
+        }, })
+        setData(response.data);
+      }}
  };
   
 const handleFileChange = (event) => {
@@ -28,7 +51,38 @@ const handleFileChange = (event) => {
     window.alert("select File")
    }
    }
+
+
+
+   const checkUsage=async()=>{
+    try{
+       const response=await axios.get(`${isLoggedIn.link}/image/seencheck?username=${isLoggedIn.user}`,{
+           headers: {
+    
+             'Authorization': isLoggedIn.accessKey
+           }, })
+           console.log(response.data)
+         setUsage(response.data)
+         }
+           catch(e){
+             
+           }
+     }
    
+
+     useEffect(()=>{
+      if(isLoggedIn.role!=='ADMIN'||!isLoggedIn.subscribe){
+        checkUsage()
+      }
+        },[])
+
+
+
+   useEffect(()=>{
+    if(isLoggedIn.role!=='ADMIN'||!isLoggedIn.subscribe){
+      checkUsage()
+    }
+      },[selectedFile])
   
     return (
       <div style={pageStyle}>

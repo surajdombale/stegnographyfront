@@ -31,7 +31,7 @@ const Footer = () => {
               <h6 class="text-uppercase fw-bold mb-4">
                 Products
               </h6>
-              <p>
+              {/* <p>
                 <a href="/embed" class="text-reset">Embbed</a>
               </p>
               <p>
@@ -39,8 +39,10 @@ const Footer = () => {
               </p>
               <p>
                 <a href="/image" class="text-reset">Images</a>
+              </p> */}
+              <p>
+                <a href="/pricing" class="text-reset">Pricing</a>
               </p>
-             
             </div>
             
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
@@ -50,9 +52,6 @@ const Footer = () => {
               </h6>
               <p>
                 <a href="/career" class="text-reset">Career</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset">Pricing</a>
               </p>
               <p>
                 <a href="/about" class="text-reset">About</a>

@@ -1,10 +1,18 @@
 import React, { useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
+import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Register, setOtp } from './Redux/Action';
 const SignUp = () => {
-    const [username, setUsername] = useState('');
+  const nav=useNavigate();
+  const[show,setShow]=useState(false);
+  const isLoggedIn = useSelector((state) => state);
+    const [username, setUsername] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [againPassword, setAgainPassword] = useState('');
+    const dispatch = useDispatch();
     const handleUsernameChange = (event) => {
       setUsername(event.target.value);
     };
@@ -19,19 +27,47 @@ const SignUp = () => {
     const handleAgainPasswordChange = (event) => {
       setAgainPassword(event.target.value);
     };
-    const handleSignUp = () => {
-      // Implement your sign-up logic here, e.g., send the user data to a server
-      console.log('Username:', username);
-      console.log('Email:', email);
-      console.log('Password:', password);
-      // Reset the form after sign-up
-      if(againPassword!==password){
-        window.alert("enter passord correct");
-      }
+    const handleSignUp = async() => {
+      const mail = email.trim();
+      // Regular expression for basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+console.log(isLoggedIn)
+      if (emailRegex.test(mail)) {
+        if(againPassword!==password){
+          
+          window.alert("enter correct password");
+         
+        }else{
+          const digits = '0123456789';
+          let otp = '';
+      
+          for (let i = 0; i < 6; i++) {
+              const randomIndex = Math.floor(Math.random() * digits.length);
+              otp += digits.charAt(randomIndex);
+          }
+        try{
+          // await axios.get(`${isLoggedIn.link}/auth/sendmail?to=${email}&msg=otp:${otp}&subject=otp`,  {
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //     // 'Authorization': isLoggedIn.accessKey
+          //   },
+          // })
+          dispatch(Register(email,username,otp,password));
+          nav("/registerotp")
+        }catch(e){
+
+        }
+      
+         
+        }
+      } 
+      
+     
+
     };
   
     return (
-      <section class="vh-60 bg-#eee" style={sectionStyle}>
+      <section class="vh-60" style={sectionStyle}>
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-12 col-xl-11">
@@ -46,7 +82,7 @@ const SignUp = () => {
                 <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-">
-                      <input type="email" id="form3Example1c" class="form-control" value={username} onChange={handleUsernameChange} />
+                      <input type="email" id="form3Example1c" class="form-control" value={username} onChange={handleUsernameChange} required />
                       <label class="form-label" for="form3Example3c">Your Name</label>
                     </div>
                   </div>
@@ -66,7 +102,7 @@ const SignUp = () => {
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" value={password} onChange={handlePasswordChange} required/>
+                      <input type={!show?"password":"email"} id="form3Example4c" class="form-control" value={password} onChange={handlePasswordChange} required/>
                       <label class="form-label" for="form3Example4c">Password</label>
                     </div>
                   </div>
@@ -74,20 +110,24 @@ const SignUp = () => {
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4cd" class="form-control" value={againPassword} onChange={handleAgainPasswordChange} required />
+                      <input type={!show?"password":"email"} id="form3Example4cd" class="form-control" value={againPassword} onChange={handleAgainPasswordChange}  required/>
                       <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                      <div><input class="form-check-input" onClick={()=>setShow(!show)} type="checkbox" value="" id="flexCheckChecked" checked={show}/>
+  <a>  Show Password</a></div>
                     </div>
+              
                   </div>
+                  
 
                   <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required/>
+                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                     <label class="form-check-label" for="form2Example3">
                       I agree all statements in <a href="#!">Terms of service</a>
                     </label>
                   </div>
 
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" class="btn btn-primary btn-lg" onSubmit={handleSignUp}>Register</button>
+                    <button type="button" class="btn btn-primary btn-lg" onClick={handleSignUp}>Register</button>
                   </div>
 
                 </form>
@@ -115,7 +155,8 @@ const SignUp = () => {
   };
   
   const sectionStyle = {
-    background: '#eee',
+    // background: '#eee',
+    margin: '40px auto 0',
   };
   
   const formStyle = {

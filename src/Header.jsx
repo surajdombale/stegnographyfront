@@ -9,10 +9,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const log=()=>{
     dispatch(logout());
-    nav("/You have Logged out");
+    nav("/login/You have Logged out");
   }
   const login=()=>{
-    nav("/Please Login");
+    nav("/login/welcome");
   }
     return (
       <nav class="navbar navbar-expand-lg navbar-light bg-light" >
@@ -23,28 +23,25 @@ const Header = () => {
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          {isLoggedIn.role==="ADMIN"||isLoggedIn.role==="USER" ?<li class="nav-item active">
             <a class="nav-link" href="/profile">Profile <span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item">
+          </li>:null}
+          {isLoggedIn.role==="ADMIN"||isLoggedIn.role==="USER" ?<li class="nav-item">
             <a class="nav-link" href="/embed">Embed</a>
-          </li>
-          <li class="nav-item">
+          </li>:null}
+          {isLoggedIn.role==="ADMIN"||isLoggedIn.role==="USER" ?<li class="nav-item">
             <a class="nav-link" href="/extract">Extract</a>
-          </li>
-          <li class="nav-item">
+          </li>:null}
+          {isLoggedIn.role==="ADMIN"||isLoggedIn.role==="USER" ?<li class="nav-item">
             <a class="nav-link" href="/image">Image</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/all">AllImage</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/show/welcome">User</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/setting">Setting</a>
-          </li>
-          
+          </li>:null}
+          {isLoggedIn.role==="ADMIN"?<li class="nav-item">
+            <a class="nav-link" href="/allimage">AllImage</a>
+          </li>:null}
+          {isLoggedIn.role==="ADMIN" ?<li class="nav-item">
+            <a class="nav-link" href="/user/welcome">User</a>
+          </li>:null}
+         
         </ul>
         
       </div>{isLoggedIn.isLoggedIn?

@@ -6,3 +6,8 @@ flex: 1;
 height: 1px;
 background: #eee;
 }
+.vh-100 {
+  flex-grow: 1; /* Allow the main content to grow and take remaining space */
+  padding: 20px;
+  overflow-y: auto;
+}

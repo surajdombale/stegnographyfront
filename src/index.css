@@ -33,3 +33,11 @@ body1 {
   opacity: 0;
   pointer-events: none;
 }
+.authorized {
+  opacity: 1;
+}
+
+.unauthorized {
+  opacity: 0;
+  pointer-events: none;
+}

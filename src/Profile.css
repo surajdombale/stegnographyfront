@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+.card1 {
+  width: 350px;
+  background-color: #efefef;
+  border: 30%;
+  cursor: pointer;
+  border-radius: 5ch;
+  transition: all 0.5s;
+}
+
+.card2 {
+
+    width: 350px;
+    background-color: #efefef;
+    border: 30%;
+    /* cursor: pointer; */
+    /* text-align: center; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    border-radius: 5ch;
+ 
+  }
+
+
+.imgprofile {
+ 
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+  }
+  
+.name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.idd {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.idd1 {
+  font-size: 12px;
+}
+
+.role {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+
+.btn1 {
+  height: 40px;
+  width: 150px;
+  border: none;
+  background-color: #000;
+  color: #aeaeae;
+  font-size: 15px;
+}
+
+.text span {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500;
+}
+
+.icons i {
+  font-size: 19px;
+}
+
+hr .new1 {
+  border: 1px solid;
+}
+
+.join {
+  font-size: 14px;
+  color: #a0a0a0;
+  font-weight: bold;
+}
+
+.date {
+  background-color: #ccc;
+}

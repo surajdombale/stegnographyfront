@@ -8,12 +8,8 @@ const AddUser = () => {
   const isLoggedIn = useSelector((state) => state);
     const [formData, setFormData] = useState({
         fullName: '',
-        username: '',
         email: '',
-        password:'',
-        role:'',
-        enable:false,
-        
+        role:'',        
       });
       useEffect(()=>{
         
@@ -39,26 +35,21 @@ const AddUser = () => {
 
 
       const handleSubmit=async()=>{
+       
+        if(formData.email!==''&&formData.fullName!==''&&formData.role!==''){
             
-      await axios.post("https://stegno-production.up.railway.app/user/save", JSON.stringify(formData), {
+      await axios.get(`${isLoggedIn.link}/user/save?username=${formData.email}&role=${formData.role}&fullName=${formData.fullName}`,  {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${isLoggedIn.accessKey}`
+          'Authorization': isLoggedIn.accessKey
         },
       })
-        .then(response => {
-          console.log(response.data)
-          nav(`/show/id no : ${response.data.id} added`)
-          
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });   
-          
+        nav(`/user/${formData.email} added`)  
+      } 
         }
   return (
     <body1>
-        
+     {isLoggedIn.role==='ADMIN'?   
     <div className="contain">
         <h1>Add New User</h1>
         
@@ -83,9 +74,21 @@ const AddUser = () => {
   <option value="USER">USER</option>
 </select>
 </div>
-  <button data-mdb-ripple-init type="button" class="btn btn-primary btn-block mb-4">Add</button>
+<p></p>
+  <button data-mdb-ripple-init type="button" onClick={handleSubmit} class="btn btn-primary btn-block mb-4">Add</button>
 </form>
-</div>
+</div>:<div  >
+
+<div >
+<h1  ><code>Access Denied</code></h1>
+<hr class="w3-border-white w3-animate-left" />
+<h3 class="w3-center w3-animate-right">You dont have permission to view this site.</h3>
+<h3 class="w3-center w3-animate-zoom">🚫🚫🚫🚫</h3>
+<h6 class="w3-center w3-animate-zoom" ><strong>Error Code</strong>: 403 forbidden</h6>
+
+</div> 
+<a href="/">Home</a>
+ </div>}
         </body1>
   )
 }
