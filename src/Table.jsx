@@ -173,7 +173,7 @@ useEffect(()=>{
             cursor: 'pointer',
           }}
          onMouseEnter={() => setShowMessages(true)} 
-        ><a>Spam User</a>
+        ><a >Spam User</a>
           {/* Bullet character representing the red dot */}
         </button>
       )}

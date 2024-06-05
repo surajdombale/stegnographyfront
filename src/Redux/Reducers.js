@@ -2,8 +2,7 @@
 
 
 const initialState = {
-  // link:"http://localhost:8080",
-  link:"https://stegno-production.up.railway.app",
+  link:"http://localhost:8080",
     isLoggedIn: false,
     accessKey: null,
     user:null,
@@ -80,7 +79,7 @@ const initialState = {
             }
             case 'REGISTER':
               return{...state,
-                // link:"https://stegno-production.up.railway.app",
+                
                 mail:action.mail,
                 fullName:action.fullName,
                 otp:action.otp,

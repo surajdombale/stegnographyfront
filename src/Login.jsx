@@ -61,7 +61,7 @@ try{
 
       
       useEffect(()=>{
-     
+     console.log(isLoggedIn);
         setMessage(id);
         if(isLoggedIn.isLoggedIn===true){
           nav("/")

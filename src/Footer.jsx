@@ -19,8 +19,7 @@ const Footer = () => {
                 <i class="fas fa-gem me-3"></i>Company name
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer content. Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit.
+                Bharti Vidhyapeeth Jawaharlal Nehru Institute Of Technology, Pune 43
               </p>
             </div>
             {/* <!-- Grid column --> */}
@@ -81,7 +80,7 @@ const Footer = () => {
       
       <div class="text-center p-4" >
         © 2024 Copyright:
-        <a class="text-reset fw-bold" href="/">www.stegno.com</a>
+        <a class="text-reset fw-bold" href="/">www.stegnographer.com</a>
       </div>
      
     </footer>
